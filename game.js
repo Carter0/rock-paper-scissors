@@ -1,19 +1,22 @@
+/* Game Logic */
+
+
 
 function getComputerChoice() {
     const randomNumber = Math.random();
     if (randomNumber < 0.3333) {
         return "rock"
-    } else if (randomNumber >= 0.3333 || randomNumber <= 0.6667) {
+    } else if (randomNumber >= 0.3333 && randomNumber <= 0.6667) {
         return "scissors"
     } else {
         return "paper"
     }
 }
 
-function getHumanChoice() {
-    const result = prompt("Enter either rock, paper, or scissors");
-    return result;
-}
+// function getHumanChoice() {
+//     const result = prompt("Enter either rock, paper, or scissors");
+//     return result;
+// }
 
 function playRound(humanChoice, computerChoice) {
     let lowerCase = humanChoice.toLowerCase();
@@ -59,19 +62,16 @@ let humanScore = 0;
 let computerScore = 0;
 
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        const result = playRound(humanSelection, computerSelection);
-        console.log(result);
-    }
-}
+/* Interactivity Work */
 
-playGame();
+const rockButton = document.querySelector("#rock-button");
+const scissorsButton = document.querySelector("#scissors-button");
+const paperButton = document.querySelector("#paper-button");
 
-console.log("player score is: ");
-console.log(humanScore);
+rockButton.addEventListener("click", (event) => {
+    const computerSelection = getComputerChoice();
+    console.log(`computer choice is:  ${computerSelection}`);
+    const result = playRound("rock", computerSelection);
+    console.log(result);
 
-console.log("computer score is: ");
-console.log(computerScore);
+});
