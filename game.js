@@ -1,19 +1,22 @@
+/* Game Logic */
+
+
 
 function getComputerChoice() {
     const randomNumber = Math.random();
     if (randomNumber < 0.3333) {
         return "rock"
-    } else if (randomNumber >= 0.3333 || randomNumber <= 0.6667) {
+    } else if (randomNumber >= 0.3333 && randomNumber <= 0.6667) {
         return "scissors"
     } else {
         return "paper"
     }
 }
 
-function getHumanChoice() {
-    const result = prompt("Enter either rock, paper, or scissors");
-    return result;
-}
+// function getHumanChoice() {
+//     const result = prompt("Enter either rock, paper, or scissors");
+//     return result;
+// }
 
 function playRound(humanChoice, computerChoice) {
     let lowerCase = humanChoice.toLowerCase();
@@ -59,19 +62,44 @@ let humanScore = 0;
 let computerScore = 0;
 
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        const humanSelection = getHumanChoice();
-        const computerSelection = getComputerChoice();
-        const result = playRound(humanSelection, computerSelection);
-        console.log(result);
-    }
+/* Interactivity Work */
+
+const buttons = document.querySelectorAll("button");
+const humanScoreText = document.querySelector("#human-score");
+const computerScoreText = document.querySelector("#computer-score");
+const resultText = document.querySelector("#result");
+
+function displayResults(computerScore, humanScore, result) {
+    humanScoreText.textContent = `Human Score: ${humanScore}`;
+    computerScoreText.textContent = `Computer Score: ${computerScore}`;
+    resultText.textContent = result;
 }
 
-playGame();
 
-console.log("player score is: ");
-console.log(humanScore);
 
-console.log("computer score is: ");
-console.log(computerScore);
+buttons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+        const buttonName = event.target.textContent;
+        const computerSelection = getComputerChoice();
+
+        switch (buttonName) {
+            case "Rock":
+                const result1 = playRound("rock", computerSelection);
+                displayResults(computerScore, humanScore, result1);
+                break;
+
+            case "Scissors":
+                const result2 = playRound("scissors", computerSelection);
+                displayResults(computerScore, humanScore, result2);
+                break;
+
+            case "Paper":
+                const result3 = playRound("paper", computerSelection);
+                displayResults(computerScore, humanScore, result3);
+                break;
+
+            default:
+                console.log("some other button clicked");
+        }
+    });
+});
