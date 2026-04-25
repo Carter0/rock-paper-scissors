@@ -65,11 +65,19 @@ let computerScore = 0;
 /* Interactivity Work */
 
 const buttons = document.querySelectorAll("button");
+const humanScoreText = document.querySelector("#human-score");
+const computerScoreText = document.querySelector("#computer-score");
+const resultText = document.querySelector("#result");
+
+function displayResults(computerScore, humanScore, result) {
+    humanScoreText.textContent = `Human Score: ${humanScore}`;
+    computerScoreText.textContent = `Computer Score: ${computerScore}`;
+    resultText.textContent = result;
+}
 
 
-// we use the .forEach method to iterate through each button
+
 buttons.forEach((button) => {
-    // and for each one we add a 'click' listener
     button.addEventListener("click", (event) => {
         const buttonName = event.target.textContent;
         const computerSelection = getComputerChoice();
@@ -77,17 +85,17 @@ buttons.forEach((button) => {
         switch (buttonName) {
             case "Rock":
                 const result1 = playRound("rock", computerSelection);
-                console.log(result1);
+                displayResults(computerScore, humanScore, result1);
                 break;
 
             case "Scissors":
                 const result2 = playRound("scissors", computerSelection);
-                console.log(result2);
+                displayResults(computerScore, humanScore, result2);
                 break;
 
             case "Paper":
                 const result3 = playRound("paper", computerSelection);
-                console.log(result3);
+                displayResults(computerScore, humanScore, result3);
                 break;
 
             default:
